@@ -428,25 +428,16 @@ const data=[
 ];
 
 
-
-
-
-
-
-// this api end-point of an API returns JSON data array
 router.get('/', function (req, res) {
     res.status(200).json(data);
 });
-
-
-// this api end-point returns an object from a data array find by id
 
 router.get('/:id', function (req, res) {
    
     let found = data.find(function (item) {
         return item.id === parseInt(req.params.id);
     });
-    // if object found return an object else return 404 not-found
+
     if (found) {
         res.status(200).json(found);
     } else {
@@ -455,13 +446,12 @@ router.get('/:id', function (req, res) {
 });
 
 // CREATE
-// this api end-point add new object to item list
-// that is add new object to `data` array
+
 router.post('/', function (req, res) {
     // get itemIds from data array
     let itemIds = data.map(item => item.id);
 
-    let newId = itemIds.length > 0 ? Math.max.apply(Math, itemIds) + 1 : 1;
+    
     
     // create an object of new Item
     let newItem = {
@@ -482,7 +472,9 @@ router.post('/', function (req, res) {
 
 
 
-// array of data, match by `id` find item and then delete
+//Delete
+
+
 router.delete('/:id', function (req, res) {
     // find item from array of data
     let found = data.find(function (item) {
@@ -491,9 +483,8 @@ router.delete('/:id', function (req, res) {
 
     if (found) {
         
-        let targetIndex = data.indexOf(found);
-
-        // splice means delete item from `data` array using index
+		let targetIndex = data.indexOf(found);
+		
         data.splice(targetIndex, 1);
     }
 
