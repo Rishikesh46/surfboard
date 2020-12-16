@@ -1,10 +1,8 @@
-// import required essentials
 const express = require('express');
-// create new router
+
 const router = express.Router();
 // create a JSON data array
-
-const data=[
+const data = [
     { id: 1, title: 'Create a project',  order: 1, completed: true, createdOn: new Date() },
     { id: 2, title: 'Take a cofféé',     order: 2, completed: true, createdOn: new Date() },
     { id: 3, title: 'Write new article', order: 3, completed: true, createdOn: new Date() },
@@ -16,6 +14,8 @@ const data=[
 router.get('/', function (req, res) {
     res.status(200).json(data);
 });
+
+// READ
 
 router.get('/:id', function (req, res) {
    
@@ -33,27 +33,31 @@ router.get('/:id', function (req, res) {
 // CREATE
 
 router.post('/', function (req, res) {
-    // get itemIds from data array
+    
     let itemIds = data.map(item => item.id);
+   
+    let orderNums = data.map(item => item.order);
+
+  
+    let newId = itemIds.length > 0 ? Math.max.apply(Math, itemIds) + 1 : 1;
+    
+    let newOrderNum = orderNums.length > 0 ? Math.max.apply(Math, orderNums) + 1 : 1;
 
     
-    
-    // create an object of new Item
     let newItem = {
-        id: newId, // generated in above step
-        firstName: req.body.firstName, 
-        lastName: req.body.lastName, 
-        company: req.body.company, 
-        
+        id: newId, 
+        title: req.body.title, 
+        order: newOrderNum, 
+        completed: false, 
+        createdOn: new Date() 
     };
 
-    // push new item object to data array of items
+ 
     data.push(newItem);
 
-    
+   
     res.status(201).json(newItem);
 });
-
 
 
 
