@@ -4,7 +4,7 @@ const {
 } = require("../controllers/blogController");
 
 const router = express.Router();
-router.route("/find").get(getAllBlogs);
+router.route("/surfboard").get(getAllBlogs);
 // router.route("/create").post(verifyPostRequest, createBlog);
 // router.route("/blog/:id").get(getBlogbyId);
 // router.route("/update/:id").post(updateBlog);
